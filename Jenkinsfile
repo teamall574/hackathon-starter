@@ -6,7 +6,7 @@ pipeline {
                 git 'https://github.com/teamall574/hackathon-starter.git'
             }
         }
-        stage(){
+        stage('docker build'){
             steps{
                 sh 'docker build -t anjitest .'
                 sh 'docker run -dit --name simple-project -p 8080:80 anjitestt'
