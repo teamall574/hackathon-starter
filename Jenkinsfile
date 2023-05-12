@@ -11,7 +11,7 @@ pipeline {
         }
         stage('build image ') {
             steps {
-                sh 'docker build -t anjiii'
+                sh 'docker build -t anjiii .'
                 sh 'docker tag anjiii anji1592/anjitest'
             }
         }
