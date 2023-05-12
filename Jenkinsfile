@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        dockerimagename = "anji1592/kubetest"
-        dockerImage = ""
-    }
     stages {
         stage('checkout source') {
             steps{
@@ -12,9 +8,8 @@ pipeline {
         }
         stage('build image ') {
             steps {
-                script {
-                    dockerImage = docker.build dockerimagename
-                }
+                sh 'docker build -t anjiii'
+                sh 'dokcer tag anjiii anji1592/anjitest'
             }
         }
         stage('push image ') {
