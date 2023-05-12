@@ -16,6 +16,7 @@ pipeline {
             environment {
                 registryCredential = 'anjitest'
             }
+        }
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
