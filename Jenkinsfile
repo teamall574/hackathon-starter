@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+                registryCredential = "anjitest"
+            }
     stages {
         stage('checkout source') {
             steps{
@@ -9,7 +12,7 @@ pipeline {
         stage('build image ') {
             steps {
                 sh 'docker build -t anjiii'
-                sh 'dokcer tag anjiii anji1592/anjitest'
+                sh 'docker tag anjiii anji1592/anjitest'
             }
         }
         stage('push image ') {
