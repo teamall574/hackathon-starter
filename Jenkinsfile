@@ -32,5 +32,13 @@ pipeline {
                     sh 'trivy --version'
                 }
           }
+        stage{
+            sh 'trivy_output=$(trivy --severity HIGH,CRITICAL <image_name>:<image_tag>)'
+
+        if echo "$trivy_output" | grep -q "High" || echo "$trivy_output" | grep -q "Critical"; then
+        echo "Aborting build due to High or Critical vulnerabilities"
+        exit 1
+        fi
+        }
      }
   }
