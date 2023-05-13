@@ -36,10 +36,10 @@ pipeline {
           }
         stage('code-analysis'){
         steps{
-            nodejs(nodeJSInstallationName: 'nodejs') {
-            sh 'npm install'
-            }
-         }
+            withSonarQubeEnv('sonarqube-test') {
+                sh 'npm run sonar'
+                }
+            }   
        }
        stage('quality gate staus') {
             steps {
