@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
-                        sh 'docker push anji1592/anjitest'
+                        sh 'docker push anji1592/anjitest:latest'
                     }
                 }
             }
