@@ -31,7 +31,7 @@ pipeline {
                 steps {
                     sh 'trivy --version'
                     //sh 'trivy image anji1592/kubetest:latest'
-                    sh 'trivy --no--progress --exit-code 1 --severity HIGH,CRITICAL image anji1592/kubetest:latest'
+                    sh 'trivy --exit-code 1 --severity HIGH,CRITICAL image anji1592/kubetest:latest'
                 }
           }
      }
