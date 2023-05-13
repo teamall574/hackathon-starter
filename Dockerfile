@@ -6,7 +6,7 @@ ENV NODE_ENV development
 COPY package.json /starter/package.json
 
 RUN yarn global add pm2
-RUN npm install uuid@7.0.3 --force
+RUN npm install uuid@latest
 RUN npm install pm2 -g
 RUN apt update && apt install sudo curl && curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | sudo -E bash -
 RUN npm install pm2 -g && pm2 update
