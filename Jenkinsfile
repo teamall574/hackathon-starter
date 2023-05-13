@@ -31,12 +31,22 @@ pipeline {
                 steps {
                     sh 'trivy --version'
                     sh 'bash anji.sh'
-                    //sh 'trivy image anji1592/kubetest:latest'
-                    //sh 'trivy --exit-code 1 --severity HIGH,CRITICAL image anji1592/kubetest:latest'
-                    //sh 'trivy_output=$(trivy --severity HIGH,CRITICAL image anji1592/kubetest:latest)'
-                    //sh 'if echo "$trivy_output" | grep -q "High" || echo "$trivy_output" | grep -q "Critical"; then | echo "Aborting build due to High or Critical vulnerabilities"  | exit 1 | fi ' 
                            
                 }
           }
+        stage('code-analysis'){
+        steps{
+            withSonarQubeEnv('sonarqube-test') {
+            sh 'npm run sonar:sonar'
+            }
+         }
+       }
+       stage('quality gate staus') {
+            steps {
+                script{
+                waitForQualityGate abortPipeline: true, credentialsId: 'sonar-token'
+                }
+            }
+        }
      }
   }
