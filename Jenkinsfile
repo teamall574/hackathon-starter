@@ -29,7 +29,7 @@ pipeline {
                 }
             }
             stage('checking trivy version') {
-                steps{
+                steps {
                     sh 'trivy -version'
                 }
             }
