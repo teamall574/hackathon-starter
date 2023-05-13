@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-                registryCredential = "anjitest"
+                dockerimagename = "anji1592/kubetest"
+                dockerImage = " "
             }
     stages {
         stage('checkout source') {
@@ -11,15 +12,19 @@ pipeline {
         }
         stage('build image ') {
             steps {
-                sh 'docker build -t anjiii .'
-                sh 'docker tag anjiii anji1592/anjitest'
+                script {
+                    dockerImage = docker.build dockerimagename
+                }
             }
         }
         stage('push image ') {
+            environment {
+                registryCredential = 'anjitest'
+            }
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
-                        sh 'docker push anji1592/anjitest:latest'
+                        dockerImage.push("latest")
                     }
                 }
             }
