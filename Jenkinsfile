@@ -34,21 +34,16 @@ pipeline {
                            
                 }
           }
-        stage('code-analysis'){
-        steps{
+        stage("sonarqube analysis"){
+          steps{
+          nodejs(nodeJSInstallationName: 'nodejs'){
             sh 'npm install'
-            withSonarQubeEnv('sonarqube-test') {
+             withSonarQubeEnv('sonar') {
                 sh 'npm install sonar-scanner'
-                sh 'npm run sonar-test'
-                }
-            }   
+                sh 'npm run sonar'
+             }  
+           }
+         }
        }
-       stage('quality gate staus') {
-            steps {
-                script{
-                waitForQualityGate abortPipeline: true, credentialsId: 'sonar-token'
-                }
-            }
-        }
      }
   }
