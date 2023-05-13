@@ -1,4 +1,4 @@
-FROM node:12-slim
+FROM node:19.5.0-alpine
 
 WORKDIR /starter
 ENV NODE_ENV development
