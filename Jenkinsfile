@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+                registryCredential = "anjitest"
                 dockerimagename = "anji1592/kubetest"
                 dockerImage = " "
             }
@@ -10,17 +11,14 @@ pipeline {
                 git 'https://github.com/teamall574/hackathon-starter.git'
             }
         }
-        stage('build image ') {
+        stage('build image') {
             steps {
                 script {
                     dockerImage = docker.build dockerimagename
                 }
             }
         }
-        stage('push image ') {
-            environment {
-                registryCredential = 'anjitest'
-            }
+        stage('push image') {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
@@ -28,11 +26,11 @@ pipeline {
                     }
                 }
             }
+        }
             stage('checking trivy version') {
                 steps {
-                    sh 'trivy -version'
+                    sh 'trivy --version'
                 }
-            }
-        }
+          }
      }
   }
