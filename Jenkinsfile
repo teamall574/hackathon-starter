@@ -45,12 +45,6 @@ pipeline {
            }
          }
        }
-        stage('quality gate staus') {
-           steps {
-                script{
-                waitForQualityGate abortPipeline: flase, credentialsId: 'sonar-token'
-                }
-          }
-       }
+    
      }
   }
