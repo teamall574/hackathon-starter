@@ -45,12 +45,5 @@ pipeline {
            }
          }
        }
-       stage("quality gateways") {
-         steps {
-                waitForQualityGate abortpipeline: false
-         }
-
-       }
-
     }
 }
