@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: ns1
+
+---
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: anji
+  namespace: ns1
+
+  labels:
+
+    app: anji 
+
+spec:
+
+  replicas: 3
+
+  selector:
+
+    matchLabels:
+
+      app: anji 
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: anji 
+
+    spec:
+
+      containers:
+
+      - name: anji 
+
+        image: anji1592/kubetes:latest
+
+        ports:
+
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  namespace: ns1
+
+  labels:
+
+    app: anji 
+
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: anji 
+  ports:
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 8080
+      targetPort: 80
