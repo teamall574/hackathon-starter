@@ -11,6 +11,7 @@ pipeline {
                 git 'https://github.com/teamall574/hackathon-starter.git'
             }
         }
+    }
         stage('checkout source') {
             steps{
                 git 'https://github.com/teamall574/hackathon-starter.git'
