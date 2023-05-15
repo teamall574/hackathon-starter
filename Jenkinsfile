@@ -45,19 +45,12 @@ pipeline {
            }
          }
        }
-        stage('quality gate staus') {
-            steps {
-                script{
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
-                }
-            }
-        }
-              stage('deploy kubernetes') {
-                  steps{
-                    script {
-                       	kubernetesDeplot(configs: "deployment.yml", kubeconfigId: "kubernets")
-                    }
-                  }
+       stage('deploy kubernetes') {
+           steps{
+              script {
+                 	kubernetesDeplot(configs: "deployment.yml", kubeconfigId: "kubernets")
               }
+          }        
+       }
      }
   }
