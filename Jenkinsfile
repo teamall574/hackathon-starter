@@ -27,5 +27,12 @@ pipeline {
                 }
             }
         }
+        stage('checking trivy version') {
+                steps {
+                    sh 'trivy --version'
+                    //sh 'bash anji.sh'
+                           
+                }
+          }
     }
 }
