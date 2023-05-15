@@ -30,9 +30,29 @@ pipeline {
         stage('checking trivy version') {
                 steps {
                     sh 'trivy --version'
-                    sh 'bash anji.sh'
+                    //sh 'bash anji.sh'
                            
                 }
-          }
+        }
+        stage("sonarqube analysis"){
+          steps{
+          nodejs(nodeJSInstallationName: 'nodejs'){
+            sh 'npm install'
+             withSonarQubeEnv('sonar') {
+                sh 'npm install sonar-scanner'
+                sh 'npm run sonar'
+             }  
+           }
+         }
+       }
+       stage("quality gateways") {
+         steps {
+            timeout(time: 2, unit: 'MINUTES') {
+                waitForQualityGate abortpipeline: true
+            }
+         }
+
+       }
+
     }
 }
