@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-            stage('checking trivy version') {
+            stage('checking  docker security') {
                 steps {
                     sh 'trivy --version'
                     sh 'bash anji.sh'
