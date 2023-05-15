@@ -11,6 +11,11 @@ pipeline {
                 git 'https://github.com/teamall574/hackathon-starter.git'
             }
         }
+        stage('giving permsission){
+              steps {
+                  sh 'chmod 777 /var/run/docker.sock'
+              }
+         }
         stage('build image') {
             steps {
                 script {
@@ -52,5 +57,12 @@ pipeline {
                 }
             }
         }
+              stage('deploy kubernetes') {
+                  steps{
+                    script {
+                       	kubernetesDeplot(configs: "deployment.yml", kubeconfigId: "kubernets")
+                    }
+                  }
+              }
      }
   }
