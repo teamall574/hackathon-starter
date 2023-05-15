@@ -11,7 +11,7 @@ pipeline {
                 git 'https://github.com/teamall574/hackathon-starter.git'
             }
         }
-        stage('giving permsission){
+        stage('giving permsission') {
               steps {
                   sh 'chmod 777 /var/run/docker.sock'
               }
