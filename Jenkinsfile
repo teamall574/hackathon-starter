@@ -47,12 +47,7 @@ pipeline {
        }
        stage('Integrating with eks cluster and deploy'){
          steps {
-            withAWS(credentials: 'credentialsss', region: 'ap-south-1'){
-	            script {
-	                sh ('aws eks update-kubeconfig--name anji --region ap-south-1')
-	                sh "kubectl apply -f deployment.yml"
-                 }
-            }
+	   sh 'kubectl create -f deployment.yml'
          }
       }
    }
