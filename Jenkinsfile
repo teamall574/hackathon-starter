@@ -11,5 +11,28 @@ pipeline {
                 git 'https://github.com/teamall574/hackathon-starter.git'
             }
         }
+        stage('build image') {
+            steps {
+                script {
+                    dockerImage = docker.build dockerimagename
+                }
+            }
+        }
+        stage('push image') {
+            steps {
+                script {
+                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
+                        dockerImage.push("latest")
+                    }
+                }
+            }
+        }
+            stage('checking trivy version') {
+                steps {
+                    sh 'trivy --version'
+                    sh 'bash anji.sh'
+                           
+                }
+          }
     }
 }
