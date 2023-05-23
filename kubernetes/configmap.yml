@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: mongodb-config
 data:
-   MONGODB_URI: "mongodb://localhost:27017/test"
+   MONGODB_URI: "mongodb://${USERNAME}:${PASSWORD}@localhost:27017/test"
